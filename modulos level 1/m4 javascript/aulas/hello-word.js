@@ -1,0 +1,1 @@
+console.log("Hello word mothefuck que se foda")

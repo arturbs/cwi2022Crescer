@@ -1,0 +1,71 @@
+CREATE TABLE IF NOT EXISTS clienteHD (
+	idcliente INT PRIMARY KEY,
+	Nome VARCHAR(100) NOT NULL,
+	cpf NUMERIC(11,0) NOT NULL UNIQUE,
+	DataNascimento TIMESTAMP NOT NULL,
+	Cidade VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS operadorHD (
+	idoperador INT PRIMARY KEY,
+	Nome VARCHAR(100) NOT NULL,
+	cpf NUMERIC(11,0) NOT NULL UNIQUE,
+	DataNascimento TIMESTAMP NOT NULL,
+	Cidade VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS gerenteHD (
+	idgerente INT PRIMARY KEY,
+	Nome VARCHAR(100) NOT NULL,
+	cpf NUMERIC(11,0) NOT NULL UNIQUE,
+	DataNascimento TIMESTAMP NOT NULL,
+	Cidade VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS administradorHD (
+	idadministrador INT PRIMARY KEY,
+	Nome VARCHAR(100) NOT NULL,
+	cpf NUMERIC(11,0) NOT NULL UNIQUE,
+	DataNascimento TIMESTAMP NOT NULL,
+	Cidade VARCHAR(100)
+);
+CREATE TABLE IF NOT EXISTS areaHD (
+	idarea INT PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS servicoHD (
+	idservico INT PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS chamadoHD (
+	idchamada INT PRIMARY KEY,
+	idcliente INT,
+	Datacriacao TIMESTAMP NOT NULL,
+	descricaosituacao VARCHAR(300),
+	previsaoexecucao TIMESTAMP NOT NULL,
+	areadestino INT NOT NULL,
+	servicodestino INT NOT NULL,
+	FOREIGN KEY (idcliente) REFERENCES clienteHD(idcliente),
+	FOREIGN KEY (areadestino) REFERENCES areaHD(idarea),
+	FOREIGN KEY (servicodestino) REFERENCES servicoHD(idservico)
+);
+
+CREATE TABLE IF NOT EXISTS registroHD (
+	idregistro INT PRIMARY KEY,
+	idchamada INT NOT NULL,
+	idcliente INT NOT NULL,
+	idarea INT NOT NULL,
+	idservico INT NOT NULL,
+	textoresposta VARCHAR(250),
+	dataabertura TIMESTAMP,
+	dataatribuido TIMESTAMP,
+	dataandamento TIMESTAMP,
+	dataesperacliente TIMESTAMP,
+	dataesperasuporte TIMESTAMP,
+	datacancelado TIMESTAMP,
+	dataresolvido TIMESTAMP,
+	FOREIGN KEY (idchamada) REFERENCES chamadoHD(idchamada),
+	FOREIGN KEY (idcliente) REFERENCES clienteHD(idcliente),
+	FOREIGN KEY (idarea) REFERENCES areaHD(idarea),
+	FOREIGN KEY (idservico) REFERENCES servicoHD(idservico)
+);

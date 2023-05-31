@@ -1,0 +1,57 @@
+CREATE TABLE IF NOT EXISTS cidadeaux AS TABLE cidadeex;
+
+TRUNCATE TABLE cidadeaux;
+
+/*
+SELECT * FROM cidadeex WHERE uf like 'RS';
+
+SELECT * FROM cidadeaux; 
+
+SELECT * FROM associadoex;
+
+*/
+
+INSERT INTO cidadeaux SELECT * FROM cidadeex WHERE uf = 'RS';
+
+CREATE TABLE estoqueex (
+	idestoque int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	nomeEstoque VARCHAR(250) NOT NULL,
+	dataCraicao DATE NOT NULL,
+	capacidade NUMERIC(6,0) NOT NULL
+);
+
+INSERT INTO estoqueex VALUES (DEFAULT,'maçaneta', TO_DATE('17/12/2022', 'DD/MM/YYYY'), 2200);
+
+/*
+select * from estoqueex;
+
+DROP TABLE estoqueex;
+*/
+
+CREATE TABLE produtoex (
+	idproduto int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	nomeproduto VARCHAR(250) NOT NULL,
+	descrproduto VARCHAR(500),
+	dataCriacao DATE NOT NULL,
+	idestoque int,
+	quantidade int,
+	preco FLOAT,
+	FOREIGN KEY (idestoque) REFERENCES estoqueex(idestoque)
+);
+
+INSERT INTO produtoex VALUES (DEFAULT,'maçaneta1','TIPO DE MACANETA', TO_DATE('17/12/2022', 'DD/MM/YYYY'),1, 200, 25.5);
+INSERT INTO produtoex VALUES (DEFAULT,'maçaneta2','TIPO DE MACANETA', TO_DATE('17/12/2022', 'DD/MM/YYYY'), 1, 200, 45.5);
+
+/*
+SELECT * FROM produtoex;
+SELECT * FROM associadoaux;
+
+*/
+
+CREATE TABLE IF NOT EXISTS associadoaux AS TABLE associadoex;
+
+UPDATE ASSOCIADOAUX  SET idcidade = 4 WHERE idassociado = 1;
+
+
+
+

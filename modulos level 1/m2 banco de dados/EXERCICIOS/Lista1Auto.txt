@@ -1,0 +1,24 @@
+CREATE TABLE IF NOT EXISTS alunoAula1 (
+	Nome VARCHAR(100) NOT NULL,
+	cpf INT NOT NULL PRIMARY KEY,
+	DataNascimento TIMESTAMP NOT NULL,
+	Cidade VARCHAR(100),
+	CursoMatriculado VARCHAR(100),
+	Matricula INT NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS cursoAula1 (
+	nome VARCHAR(75) NOT NULL,
+	dataCurso TIMESTAMP NOT NULL,
+	localizacao VARCHAR(100),
+	situacao VARCHAR(100),
+	preRequisito VARCHAR(75),
+	PRIMARY KEY (nome),
+	FOREIGN KEY (preRequisito) REFERENCES cursoAula1 (nome) 
+);
+
+ALTER TABLE cursoAula1 ADD COLUMN valor NUMERIC(5,2) NOT NULL CHECK(valor >0);
+
+ALTER TABLE alunoAula1 ADD FOREIGN KEY (cursoMatriculado) REFERENCES cursoAula1(nome);
+
+

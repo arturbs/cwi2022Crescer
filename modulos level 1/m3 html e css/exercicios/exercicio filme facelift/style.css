@@ -1,0 +1,18 @@
+.box {
+    display: inline-block;
+    height: fit-content;
+    width: 75%;
+
+    margin: 15px auto 20px;
+
+    background-attachment: scroll;
+    background: lightseagreen;
+    color: rebeccapurple;
+}
+
+].box-parent {
+    font-size: 0;
+}
+span{
+    width: 100%;
+}

@@ -1,0 +1,49 @@
+exercicio 1:
+
+CREATE TABLE IF NOT EXISTS alunoAula1 (
+	Nome VARCHAR(100) NOT NULL,
+	cpf INT NOT NULL PRIMARY KEY,
+	DataNascimento TIMESTAMP NOT NULL,
+	Cidade VARCHAR(100),
+	CursoMatriculado VARCHAR(100),
+	Matricula INT NOT NULL UNIQUE
+);
+
+resultado: 
+CREATE TABLE
+
+exercicio 2:
+
+CREATE TABLE IF NOT EXISTS cursoAula1 (
+	nome VARCHAR(75) NOT NULL,
+	dataCurso TIMESTAMP NOT NULL,
+	localizacao VARCHAR(100),
+	situacao VARCHAR(100),
+	preRequisito VARCHAR(75),
+	PRIMARY KEY (nome),
+	FOREIGN KEY (preRequisito) REFERENCES cursoAula1 (nome) 
+);
+
+
+resultado: 
+CREATE TABLE
+
+exercicio 3:
+
+ALTER TABLE cursoAula1 ADD COLUMN valor NUMERIC(5,2) NOT NULL CHECK(valor >0);
+
+resultado:
+ALTER TABLE
+
+exercicio 4:
+
+ALTER TABLE alunoAula1 ADD FOREIGN KEY (cursoMatriculado) REFERENCES cursoAula1(nome);
+
+resultado:
+ALTER TABLE
+
+exercicio 5:
+
+alunos precisam de curso para se matricular. Podemos criar ids para alunos e cursos.
+
+
